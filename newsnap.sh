@@ -22,8 +22,9 @@ fi
 ftp ${CHOSEN_MIRROR}{install58.fs,SHA256,SHA256.sig}
 SNAP_HASH=`sha256 install58.fs`
 SIG_HASH=`grep install58.fs SHA256`
+SIG_VER=`signify -V -p /etc/signify/openbsd-58-base.pub -m SHA256`
 
-if [ signify -V -p /etc/signify/openbsd-58-base.pub -m SHA256 ] && [ "$SNAP_HASH" = "$SIG_HASH" ]; then
+if [ $? ] && [ "$SNAP_HASH" = "$SIG_HASH" ]; then
     echo "\n\tReady to image!"
 else
     echo "\n\tDANGER, WILL ROBINSON!!!"
